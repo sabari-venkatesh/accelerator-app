@@ -1,0 +1,39 @@
+.link {
+	text-decoration: none;
+	color: inherit;
+	display: inline-block;
+	margin: 0;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.link--push {
+	position: relative;
+	overflow: hidden;
+	.link__text {
+		display: block;
+		transition: all .3s cubic-bezier(.7, 0, .3, 1);
+		@include space(0.5, padding-top);
+	}
+	&:after {
+		content: attr(data-hover);
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		background: #172d52;
+		color: #fff;
+		transform: translate3d(-100%, 0, 0);
+		transition: all .3s cubic-bezier(.7, 0, .3, 1);
+		@include space(0.5, padding-top);
+	}
+	&:hover {
+		.link__text {
+			transform: translate3d(100%, 0, 0);
+		}
+		&:after {
+			transform: translate3d(0, 0, 0);
+		}
+	}
+}

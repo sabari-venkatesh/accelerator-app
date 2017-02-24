@@ -1,0 +1,30 @@
+{
+	"usa": {
+		"title": "united states of america",
+		"locations": [
+			{
+				"atlanta": {
+					"address": "3025 Windward Plaza Suite 525 Alpharetta, GA 30005",
+					"phone": "(470) 210-3330"
+				}
+      },
+			{
+				"boston": {
+					"address": "607 North Ave.,Suite 14,Wakefield, MA 01880",
+					"phone": "(978) 764-3690"
+				}
+      }
+    ]
+	},
+	"india": {
+		"title": "republic of india",
+		"locations": [
+			{
+				"chennai": {
+					"address": "Ascendas IT Park, Zenith Building,Unit No: 1 & 4, 12th Floor, Taramani Road, Taramani Chennai 600113",
+					"phone": "(+91) 44-3061-2100"
+				}
+      }
+    ]
+	}
+}

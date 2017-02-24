@@ -1,0 +1,100 @@
+@include font-face(Roboto, "../fonts/roboto/Roboto-Light", 300);
+@include font-face(Roboto, "../fonts/roboto/Roboto-Regular", 400);
+@include font-face(Roboto, "../fonts/roboto/Roboto-Bold", 700);
+html {
+	@if $show-baseline==true {
+		$baseline-size: strip-units($base-line-height);
+		background-image: url(http://basehold.it/i/#{$baseline-size});
+	}
+	font-size: $base-font-size;
+	-webkit-font-smoothing: antialiased;
+	line-height: $base-line-height;
+}
+
+body {
+	font-family: Roboto, Arial, Helvetica, sans-serif;
+	font-size: 1rem;
+	line-height: $rhythm;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+	margin-top: 0;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+	font-weight: 300;
+}
+
+h1,
+.h1 {
+	@include font-size(3);
+	@include space(2);
+}
+
+h2,
+.h2 {
+	@include font-size(2);
+	@include space(1);
+}
+
+h3,
+.h3 {
+	@include font-size(1);
+	@include space(1);
+}
+
+h4,
+.h4 {
+	@include font-size(0);
+}
+
+h5,
+.h5 {
+	@include font-size(-1);
+}
+
+p,
+ul,
+ol,
+pre,
+table,
+blockquote {
+	@include space(1);
+}
+
+hr,
+.hr {
+	border: 1px solid;
+	margin: -1px 0;
+}
+
+sub,
+sup {
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}

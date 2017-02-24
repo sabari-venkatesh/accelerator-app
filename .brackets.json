@@ -1,0 +1,10 @@
+{
+    "jscodehints.detectedExclusions": [
+        "D:/www/accelerator/fireshell/src/components/modernizr/feature-detects/css-remunit.js",
+        "D:/www/accelerator/fireshell/src/components/modernizr/feature-detects/css-resize.js",
+        "D:/www/accelerator/fireshell/src/components/modernizr/feature-detects/css-scrollbars.js",
+        "D:/www/accelerator/fireshell/app/assets/components/grunt.js",
+        "D:/www/accelerator/fireshell/app/assets/js/scripts.min.js",
+        "D:/www/accelerator/fireshell/src/js/scripts.js"
+    ]
+}

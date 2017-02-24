@@ -1,0 +1,89 @@
+.region[role="banner"] {
+	background: #63b9b8 url("../img/banner.png") no-repeat 0 0;
+	background-size: cover;
+	@include space(1, padding);
+}
+
+.banner__text {
+	align-self: center;
+	color: #fff;
+	.highlight {
+		background: #172d52;
+		display: inline-block;
+	}
+}
+
+.btn {
+	padding: 0.5em 1em;
+	border: 0;
+}
+
+.btn--link {
+	background: transparent;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+	color: #fff;
+}
+
+.logo {
+	position: absolute;
+	img {
+		vertical-align: middle;
+	}
+}
+
+#btn__menu--toggle {
+	$btn-ratio: ($base-line-height - $base-line-height/4) / 2;
+	display: block;
+	position: fixed;
+	z-index: map-get($layers, navtoggle);
+	@include space(1.5, top);
+	@include space(1.5, right);
+	@include space(1, height);
+	width: 2em;
+	span {
+		background: #172d52;
+		display: inherit;
+		position: absolute;
+		left: 0;
+		top: $btn-ratio;
+		height: $base-line-height/4;
+		width: 100%;
+		transition: all 0.5s 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+	}
+	&:after,
+	&:before {
+		content: "";
+		position: absolute;
+		right: 0;
+		width: 90%;
+		height: $base-line-height/4;
+		background: #172d52;
+		transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+	}
+	&:before {
+		top: 0;
+		transform-origin: 0% 0%;
+	}
+	&:after {
+		bottom: 0;
+		transform-origin: 0% 100%;
+	}
+	&.close {
+		background: transparent;
+		span {
+			transform: scale(0);
+			transition: all 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+			opacity: 0;
+		}
+		&:after,
+		&:before {
+			transition: transform 0.3s 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+		}
+		&:before {
+			transform: rotate(45deg) translate(2px, -2px);
+		}
+		&:after {
+			transform: rotate(-45deg) translate(2px, 2px);
+		}
+	}
+}
