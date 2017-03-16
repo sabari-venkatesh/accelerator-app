@@ -27,6 +27,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/js/vendor/classie.js",
+			"settings":
+			{
+				"buffer_size": 1603,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -35,13 +43,33 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "package",
+		"height": 388.0,
+		"last_filter": "grunt",
 		"selected_items":
 		[
 			[
+				"grunt",
+				"Grunt"
+			],
+			[
+				"indent",
+				"Indexing Status"
+			],
+			[
+				"docb",
+				"DocBlockr: Decorate line comment"
+			],
+			[
 				"package",
 				"Package Control: Install Package"
+			],
+			[
+				"build",
+				"Build With: grunt"
+			],
+			[
+				"Snippet: ",
+				"Snippet: #!/usr/bin/env"
 			],
 			[
 				"paclage",
@@ -52,7 +80,7 @@
 				"Toggle Comment"
 			]
 		],
-		"width": 432.0
+		"width": 424.0
 	},
 	"console":
 	{
@@ -75,10 +103,22 @@
 	},
 	"expanded_folders":
 	[
-		"/D/www/accelerator/fireshell"
+		"/D/www/accelerator/fireshell",
+		"/D/www/accelerator/fireshell/src",
+		"/D/www/accelerator/fireshell/src/js",
+		"/D/www/accelerator/fireshell/src/js/vendor"
 	],
 	"file_history":
 	[
+		"/D/www/accelerator/fireshell/app/basic.html",
+		"/D/www/accelerator/fireshell/src/js/scripts.js",
+		"/C/Users/sabarivenkateshr/AppData/Roaming/Sublime Text 3/Packages/Grunt/SublimeGrunt.sublime-settings",
+		"/D/www/accelerator/fireshell/Gruntfile.js",
+		"/C/Users/sabarivenkateshr/AppData/Roaming/Sublime Text 3/Packages/User/grunt.sublime-build",
+		"/C/Users/sabarivenkateshr/AppData/Roaming/Sublime Text 3/Packages/User/SublimeGrunt.sublime-settings",
+		"/C/Users/sabarivenkateshr/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings",
+		"/D/www/accelerator/fireshell/app/index.html",
+		"/D/www/accelerator/fireshell/fireshell.sublime-project",
 		"/D/www/accelerator/fireshell/html",
 		"/D/www/singlepage/app/styles/main.scss",
 		"/D/www/sabarigr.github.io/wsk/.gitignore",
@@ -159,8 +199,38 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/js/vendor/classie.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1603,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								365,
+								365
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -195,9 +265,17 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 177.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 77.0
 	},
 	"pinned_build_system": "",
 	"project": "fireshell.sublime-project",

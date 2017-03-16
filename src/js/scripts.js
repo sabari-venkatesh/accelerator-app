@@ -2,20 +2,20 @@
 
 	'use strict';
 	var classie = window.classie,
-		body = document.body,
-		triggerBttn = document.getElementById('btn__menu--toggle'),
-		overlay = document.querySelector('.nav__overlay'),
-		transEndEventNames = {
-			'WebkitTransition': 'webkitTransitionEnd',
-			'MozTransition': 'transitionend',
-			'OTransition': 'oTransitionEnd',
-			'msTransition': 'MSTransitionEnd',
-			'transition': 'transitionend'
-		},
-		transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
-		support = {
-			transitions: Modernizr.csstransitions
-		};
+	body = document.body,
+	triggerBttn = document.getElementById('btn__menu--toggle'),
+	overlay = document.querySelector('.nav__overlay'),
+	transEndEventNames = {
+		'WebkitTransition': 'webkitTransitionEnd',
+		'MozTransition': 'transitionend',
+		'OTransition': 'oTransitionEnd',
+		'msTransition': 'MSTransitionEnd',
+		'transition': 'transitionend'
+	},
+	transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
+	support = {
+		transitions: Modernizr.csstransitions
+	};
 
 	function toggleOverlay() {
 		if (classie.has(body, 'when-overlay')) {
@@ -50,22 +50,24 @@
 	// scrollmagic
 	var slides = document.querySelectorAll('.region');
 
-	// create scene for every slide
+	//////////////////////////////////
+	// create scene for every slide //
+	//////////////////////////////////
 	for (var i = 0; i < slides.length; i++) {
 		new ScrollMagic.Scene({
-				triggerElement: slides[i],
-			})
-			.setPin(slides[i])
-			.addTo(controller);
+			triggerElement: slides[i],
+		})
+		.setPin(slides[i])
+		.addTo(controller);
 	}
 
 	function wheel(event) {
 		event.preventDefault();
 		var delta = event.wheelDelta / 120 || -event.detail / 3,
-			scrollTime = 1.5,
-			scrollDistance = 450,
-			scrollTop = window.pageYOffset || document.body.scrollTop,
-			scrollToPos = scrollTop - parseInt(delta * scrollDistance);
+		scrollTime = 1.5,
+		scrollDistance = 450,
+		scrollTop = window.pageYOffset || document.body.scrollTop,
+		scrollToPos = scrollTop - parseInt(delta * scrollDistance);
 
 		TweenMax.to(window, scrollTime, {
 			scrollTo: {
