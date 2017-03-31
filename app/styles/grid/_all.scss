@@ -1,0 +1,37 @@
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	&.is-vertical {
+		flex-direction: column;
+	}
+	&.is-center {
+		justify-content: center;
+		align-items: center;
+	}
+	&.is-distributed {
+		justify-content: space-between;
+	}
+}
+
+.col {
+	flex: 1;
+	.row-3 & {
+		flex: 0 0 33.33%;
+	}
+}
+
+.col-top {
+	align-self: flex-start;
+	margin-top: auto;
+}
+
+.col-right {
+	align-self: flex-end;
+	margin-left: auto;
+}

@@ -1,0 +1,28 @@
+.content[role="banner"] {
+	background: #63b9b8 url("../images/banner-home.png") no-repeat 0 0;
+	background-size: cover;
+	.page-population & {
+		background: #63b9b8 url("../images/banner-population.jpg") no-repeat 0 0;
+		background-size: cover;
+	}
+}
+
+.banner_text {
+	align-self: center;
+	color: #fff;
+}
+
+.typewrite {
+	background: #172d52;
+	display: inline-block;
+	> .wrap {
+		border-right: 0.05em solid #172d52;
+	}
+}
+
+.logo {
+	position: absolute;
+	img {
+		vertical-align: middle;
+	}
+}

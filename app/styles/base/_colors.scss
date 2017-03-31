@@ -1,0 +1,20 @@
+$color-black: #222;
+$color-grey: lighten($color-black, 50%);
+$color-green: #66b573;
+$color-teal: #126489;
+
+.color-green {
+	color: $color-green !important;
+}
+
+.color-black {
+	color: $color-black !important;
+}
+
+.bg-green {
+	background-color: $color-green !important;
+}
+
+.bg-teal {
+	background-color: $color-teal !important;
+}

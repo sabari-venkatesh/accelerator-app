@@ -1,0 +1,114 @@
+.nav_overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: map-get($layers, navoverlay);
+	background: rgba(255, 255, 255, 0.8);
+	visibility: hidden;
+	transform: translateY(100%);
+	transition: transform 0.5s cubic-bezier(.7, 0, .3, 1), visibility 0s 0.5s;
+	.when-overlay & {
+		visibility: visible;
+		transform: translateY(0%);
+		transition: transform 0.5s;
+	}
+}
+
+.nav {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	ul {
+		list-style: none;
+	}
+	li {
+		text-transform: uppercase;
+		font-size: 24px;
+		margin: 12px 0;
+	}
+	a {
+		color: #172d52;
+		overflow: hidden;
+		display: block;
+		span {
+			display: inline-block;
+			position: relative;
+			transform: translate3d(0, 0, 0);
+			transition: all .3s cubic-bezier(.7, 0, .3, 1);
+			&:after {
+				content: attr(data-hover);
+				white-space: nowrap;
+				position: absolute;
+				top: 100%;
+				left: 0;
+				font-weight: bold;
+			}
+		}
+		&:hover {
+			span {
+				transform: translate3d(0, -100%, 0);
+			}
+		}
+	}
+}
+
+.nav_toggle {
+	$btn-ratio: ($base-line-height - $base-line-height/4) / 2;
+	display: block;
+	position: fixed;
+	z-index: map-get($layers, navtoggle);
+	@include space(1.5, top);
+	@include space(1.5, right);
+	height: $base-line-height;
+	width: 2.5em;
+	span {
+		background: #172d52;
+		display: inherit;
+		position: absolute;
+		left: 0;
+		top: $btn-ratio;
+		height: $base-line-height/4;
+		width: 100%;
+		transition: all 0.5s 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+	}
+	&:after,
+	&:before {
+		content: "";
+		position: absolute;
+		right: 0;
+		width: 80%;
+		height: $base-line-height/4;
+		background: #172d52;
+		transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+	}
+	&:before {
+		top: 0;
+		transform-origin: 0% 0%;
+	}
+	&:after {
+		bottom: 0;
+		transform-origin: 0% 100%;
+	}
+	&.close {
+		background: transparent;
+		span {
+			transform: scale(0);
+			transition: all 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+			opacity: 0;
+		}
+		&:after,
+		&:before {
+			transition: transform 0.3s 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+		}
+		&:before {
+			transform: rotate(45deg) translate(2px, -2px);
+		}
+		&:after {
+			transform: rotate(-45deg) translate(2px, 2px);
+		}
+	}
+}

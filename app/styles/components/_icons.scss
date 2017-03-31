@@ -1,0 +1,72 @@
+@include font-face(healthcare, "../fonts/healthcare/healthcare", 400);
+
+[class^="icon-"],
+[class*=" icon-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'healthcare' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before {
+	content: "\e902";
+}
+
+.icon-file:before {
+	content: "\e926";
+}
+
+.icon-phone:before {
+	content: "\e942";
+}
+
+.icon-location:before {
+	content: "\e948";
+}
+
+.icon-download:before {
+	content: "\e9c7";
+}
+
+.icon-loop:before {
+	content: "\ea2e";
+}
+
+.icon-arrow-up:before {
+	content: "\ea3a";
+}
+
+.icon-arrow-right:before {
+	content: "\ea3c";
+}
+
+.icon-arrow-down:before {
+	content: "\ea3e";
+}
+
+.icon-arrow-left:before {
+	content: "\ea40";
+}
+
+.icon-google-plus:before {
+	content: "\ea8b";
+}
+
+.icon-facebook:before {
+	content: "\ea90";
+}
+
+.icon-twitter:before {
+	content: "\ea96";
+}
+
+.icon-linkedin:before {
+	content: "\eaca";
+}

@@ -1,0 +1,71 @@
+.button {
+	padding: 0.5em 1em;
+	border: 0;
+	background-image: none;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+	line-height: 1;
+	border: 0;
+	&::-moz-focus-inner {
+		border: 0;
+	}
+	&:focus {
+		outline: 0;
+	}
+	&:active,
+	&:focus {}
+	&.btn-secondary {
+		background-color: $color-secondary;
+		color: $white;
+		&:hover {
+			background-color: darken($color-secondary, 5%);
+		}
+		&:focus {
+			background-color: darken($color-secondary, 10%);
+		}
+		&:active {
+			background-color: darken($color-secondary, 15%);
+		}
+	}
+	@at-root a#{&} {
+		background: transparent;
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+		transition: all .2s ease-in;
+		color: #fff;
+		position: relative;
+		overflow: hidden;
+		display: inline-block;
+		&:before,
+		&:after {
+			content: "";
+			position: absolute;
+			transition: all .4s cubic-bezier(0.23, 1, .32, 1);
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+		}
+		&:before {
+			border-top: 2px solid #fff;
+			border-bottom: 2px solid #fff;
+			transform: translate3d(-100%, 0, 0);
+		}
+		&:after {
+			border-right: 2px solid #fff;
+			border-left: 2px solid #fff;
+			transform: translate3d(0, -100%, 0);
+		}
+		&:hover {
+			box-shadow: none;
+			text-decoration: none;
+		}
+		&:hover:before,
+		&:hover:after {
+			transform: translate3d(0, 0, 0);
+		}
+	}
+}
+
+.button-block {
+	width: 100%;
+}
