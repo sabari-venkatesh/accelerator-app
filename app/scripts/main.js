@@ -9,7 +9,7 @@ function loadMap() {
 	});
 }
 
-var animateHome = function() {
+var animateHome = function () {
 	/* homepage animate after loading */
 
 	var tl = new TimelineLite({
@@ -26,11 +26,18 @@ var animateHome = function() {
 	}, 0.1, '+=0.5', function () {
 		typewrite();
 		loadMap();
+		smoothScroll.init();
+		[].forEach.call(document.querySelectorAll('[class*=scroll]'), function (item, index) {
+			item.onclick = function () {
+				var target = this.hash;
+				smoothScroll.scrollTo(document.querySelector(target));
+			}
+		});
 	});
 	tl.play();
 }
 
-var animateOutHome = function() {
+var animateOutHome = function () {
 	var tl = new TimelineLite({
 		paused: true,
 	});
@@ -74,6 +81,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			.addTo(controller);
 	});
 
+	smoothScroll.init();
+
+	/* make foreach as utility function. Ref: foreachiteration in chrome snippets tab */
+	[].forEach.call(document.querySelectorAll('[class*=scroll]'), function (item, index) {
+		item.onclick = function () {
+			var target = this.hash;
+			smoothScroll.scrollTo(document.querySelector(target));
+		}
+	});
 
 });
 

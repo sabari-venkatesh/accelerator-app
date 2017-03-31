@@ -1,139 +1,144 @@
-(function () {
+(function (root, factory) {
+	if (typeof define === 'function' && define.amd) {
+		define([], factory(root));
+	} else if (typeof exports === 'object') {
+		module.exports = factory(root);
+	} else {
+		root.smoothScroll = factory(root);
+	}
+})(typeof global !== "undefined" ? global : this.window || this.global, function (root) {
 
-	this.SmoothScroll = function (settings) {
-		if (typeof settings === 'undefined') {
-			settings = {};
+	'use strict';
+
+	var smoothScroll = {};
+	var settings, scrollToPosition = 0;
+
+	var defaults = {
+		'amount': 400,
+		'speed': 500
+	};
+
+	var stopScroll = function () {
+		/* if (typeof this.scrollInterval !== 'undefined') {
+		            clearInterval(this.scrollInterval);
+		            this.scrollInterval = undefined;
+		        }*/
+	};
+
+	var easeInOutCubic = function (t) {
+		return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
+	}
+
+	var getTop = function (element, start) {
+		if (element.nodeName === 'HTML')
+			return -start
+		return element.getBoundingClientRect().top + start
+	};
+
+	var position = function (start, end, elapsed, duration) {
+		if (elapsed > duration)
+			return end;
+		return start + (end - start) * easeInOutCubic(elapsed / duration);
+	};
+
+	smoothScroll.init = function (options) {
+		console.log("destroyed before init");
+		smoothScroll.destroy();
+		console.log("init");
+		settings = extend(defaults, options || {});
+
+		window.addEventListener('wheel', this.scroll.bind(this));
+
+	};
+
+	smoothScroll.destroy = function () {
+		settings = null;
+	};
+
+	smoothScroll.scrollTo = function (el, duration, callback, context) {
+		duration = duration || 500;
+		context = context || window;
+		var start = context.scrollTop || window.pageYOffset;
+		var self = this;
+
+		if (typeof el === 'number') {
+			var end = parseInt(el);
+		} else {
+			var end = getTop(el, start);
 		}
-		var defaults = {
-			'amount': 150,
-			'speed': 900
+
+		var clock = Date.now();
+		var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || function (fn) {
+			window.setTimeout(fn, 15);
 		};
 
-		for (var key in defaults) {
-			if (!settings.hasOwnProperty(key)) {
-				settings[key] = defaults[key];
+		var step = function () {
+			var elapsed = Date.now() - clock;
+			if (context !== window) {
+				context.scrollTop = position(start, end, elapsed, duration);
+			} else {
+				window.scroll(start, position(start, end, elapsed, duration));
+			}
+
+			if (elapsed > duration) {
+				if (typeof callback === 'function') {
+					callback(el);
+				}
+			} else {
+				requestAnimationFrame(step);
 			}
 		}
-
-		// Disable in mobile because we don't need smooth scrolling there
-		if (navigator.userAgent.match(/Mobi/)) {
-			return;
-		}
-
-		this.settings = settings;
-		this.startedAsTrackpad = false;
-		this.start();
-
+		step();
 	};
 
-	SmoothScroll.prototype = {
-		start: function () {
-			document.addEventListener('DOMContentLoaded', function () {
-				window.addEventListener('wheel', this.overrideScroll.bind(this));
-			}.bind(this));
-		},
-		stop: function () {
-			if (typeof this.scrollInterval !== 'undefined') {
-				this.startedAsTrackpad = false;
-				clearInterval(this.scrollInterval);
-				this.scrollInterval = undefined;
-			}
-		},
-		scroll: function (isDown, timestamp) {
-			// If the scroll went the opposite way, reset the scroll as if from full stop
-			if (isDown !== this.isDown && typeof this.isDown !== 'undefined') {
-				this.stop();
-			}
-			this.isDown = isDown;
+	smoothScroll.scroll = function (event) {
 
-			// If called to scroll from a full stop, create our scroller loop
-			if (typeof this.scrollInterval === 'undefined') {
+		var delta = event.wheelDelta ? -event.wheelDelta / 120 : (event.detail || event.deltaY) / 3,
+			isDown = delta > 0,
+			timestamp = event.timestamp;
 
-				this.startingSpeed = this.settings.amount;
-				this.scrollInterval = setInterval(function () {
+		event = event || window.event;
+		if (event.preventDefault) {
+			event.preventDefault();
+		}
+		event.returnValue = false;
 
-					// Perform the scroll
-					var scrollBy = (this.isDown ? 1 : -1) * this.startingSpeed / 15;
-					window.scrollBy(0, scrollBy);
+		if (isDown != this.isDown && typeof this.isDown !== 'undefined') {
+			stopScroll();
+		}
 
-					// Stop the scroller when the scroll becomes too small
-					this.startingSpeed *= 1 - (900 / this.settings.speed) / 10; // 0.9;
-					if (Math.abs(scrollBy) < 1) {
-						this.stop();
-					}
+		this.isDown = isDown;
+		this.startingSpeed = settings.amount;
+		scrollToPosition = window.pageYOffset + (this.isDown ? 1 : -1) * this.startingSpeed;
 
-				}.bind(this), 16.666666667); // 60fps
+		this.scrollTo(scrollToPosition, settings.speed);
+	};
 
-				// If called while the page is still scrolling, add more momentum to the current scroll
-			} else {
-				// Base the momentum multiplier on the delta time to avoid super fast scrolls
-				var multiplier = 1 + (timestamp - this.prevTimestamp) / 40 * 0.7;
-
-				// Limit the amount
-				this.startingSpeed = Math.max(this.startingSpeed * multiplier, this.settings.amount);
-				this.startingSpeed = Math.min(this.startingSpeed, 300);
-			}
-
-			this.prevTimestamp = timestamp;
-		},
-
-		overrideScroll: function (e) {
-
-			// Normalize wheel delta scroll
-			var delta = e.wheelDelta ? -e.wheelDelta / 120 : (e.detail || e.deltaY) / 3;
-
-			/**
-			 * Basically, when we check the delta variable, trackpads give out a value of < 1 && < -1
-			 * mouse wheel scrolls give out a value >= 1 || <= -1
-			 * We can use this to turn OFF smooth scrolling for trackpads.
-			 *
-			 * IMPORTANT: Firefox in Mac somehow handles things differently.
-			 * the skipCheck variable handles things for FF in Macs
-			 */
-
-			// Special for Firefox-Mac
-			var skipCheck = false;
-			if (typeof window.mozInnerScreenX !== 'undefined') {
-				if (navigator.platform.indexOf('Mac') !== -1) {
-					this.startedAsTrackpad = false;
-					skipCheck = true;
-					if (e.deltaY === parseInt(e.deltaY, 10)) {
-						this.startedAsTrackpad = true;
-						return;
-					}
+	var forEach = function (collection, callback, scope) {
+		if (Object.prototype.toString.call(collection) === '[object Object]') {
+			for (var prop in collection) {
+				if (Object.prototype.hasOwnProperty.call(collection, prop)) {
+					callback.call(scope, collection[prop], prop, collection);
 				}
 			}
-
-			if (typeof this.trackpadTimeout !== 'undefined') {
-				clearTimeout(this.trackpadTimeout);
-				this.trackpadTimeout = undefined;
+		} else {
+			for (var i = 0, len = collection.length; i < len; i++) {
+				callback.call(scope, collection[i], i, collection);
 			}
-
-			// If delta is less than 1, assume that we are using a trackpad and do the normal behavior
-			if ((Math.abs(delta) < 1 || this.startedAsTrackpad) && !skipCheck) {
-
-				this.trackpadTimeout = setTimeout(function () {
-					this.startedAsTrackpad = false;
-					this.trackpadTimeout = undefined;
-				}.bind(this), 200);
-
-				this.startedAsTrackpad = true;
-				return true;
-			}
-
-			// If the code reaches here, then scrolling will be smoothened
-
-			// Disable normal scrolling
-			e = e || window.event;
-			if (e.preventDefault) {
-				e.preventDefault();
-			}
-			e.returnValue = false;
-
-			// Perform our own scrolling
-			this.scroll(delta > 0, e.timeStamp);
 		}
 	};
-}());
 
-new SmoothScroll();
+	var extend = function (defaults, options) {
+		var extended = {};
+		forEach(defaults, function (value, prop) {
+			extended[prop] = defaults[prop];
+		});
+		forEach(options, function (value, prop) {
+			extended[prop] = options[prop];
+		});
+		return extended;
+	};
+
+	return smoothScroll;
+
+});

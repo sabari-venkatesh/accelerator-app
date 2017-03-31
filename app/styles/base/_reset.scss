@@ -59,11 +59,12 @@ textarea {
 }
 
 a {
+	color: inherit;
 	background: transparent;
 	text-decoration: none;
 	&:hover,
 	&:focus {
-		text-decoration: underline;
+
 	}
 }
 
