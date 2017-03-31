@@ -15,3 +15,6 @@ http://codepen.io/hi-im-si/pen/DHoup
 
 Map update based on location selection
 http://jsfiddle.net/coxb9so4/
+
+Javascript utilities
+https://blog.garstasio.com/you-dont-need-jquery/utils/#is-this-an-object,-array,-or-a-function?
