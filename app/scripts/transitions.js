@@ -1,3 +1,49 @@
+var animateHome = function () {
+	/* homepage animate after loading */
+
+	var tl = new TimelineLite({
+		paused: true,
+	});
+
+	tl.staggerFromTo(['.banner_text', '.banner_text .button'], 0.8, {
+		x: "-75%",
+		autoAlpha: 0
+	}, {
+		x: "0%",
+		autoAlpha: 1,
+		ease: Power4.easeInOut
+	}, 0.1, '+=0.5', function () {
+		typewrite();
+		smoothScroll.init();
+		[].forEach.call(document.querySelectorAll('[class*=scroll]'), function (item, index) {
+			item.onclick = function () {
+				var target = this.hash;
+				smoothScroll.scrollTo(document.querySelector(target));
+			}
+		});
+	});
+	tl.play();
+}
+
+var animateOutHome = function () {
+	var tl = new TimelineLite({
+		paused: true,
+	});
+
+	tl.staggerFromTo(['.banner_text', '.banner_text .button'], 0.8, {
+		x: "0",
+		autoAlpha: 1,
+	}, {
+		x: "-75%",
+		autoAlpha: 0,
+		ease: Power4.easeInOut
+	}, 0.1, '+=0.5', function () {
+
+	});
+	tl.play();
+};
+
+
 // Define barba properties
 Barba.transitionLength = 1500;
 
