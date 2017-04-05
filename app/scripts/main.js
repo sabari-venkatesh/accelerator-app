@@ -45,7 +45,48 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	});
 
+	initCarousel();
 });
+
+function initCarousel() {
+	const slider = new Siema({
+		selector: '.slider',
+		duration: 200,
+		easing: 'ease-out',
+		draggable: false
+	});
+
+	// Add a function that generates pagination to prototype
+	Siema.prototype.addPagination = function () {
+		var pagination = document.createElement('div');
+		pagination.classList.add('pagination');
+		this.selector.appendChild(pagination);
+		for (let i = 0; i < this.innerElements.length; i++) {
+			var btn = document.createElement('button');
+			btn.classList.add('slider_page');
+			btn.addEventListener('click', () => {
+				getSiblings(btn);
+				this.goTo(i);
+				document.querySelector(".slider_page:nth-child(" + (i+1) + ")").classList.add('active');
+			});
+			pagination.appendChild(btn);
+			document.querySelector(".slider_page:first-child").classList.add('active');
+		}
+	}
+
+	// Trigger pagination creator
+	slider.addPagination();
+}
+
+function getSiblings(el) {
+	var siblings = [];
+	el = el.parentNode.firstChild;
+	do {
+		el.classList.remove("active");
+		siblings.push(el);
+	} while (el = el.nextSibling);
+	return siblings;
+}
 
 function toggleOverlay() {
 	var body = document.body,

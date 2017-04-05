@@ -21,6 +21,8 @@ var animateHome = function () {
 				smoothScroll.scrollTo(document.querySelector(target));
 			}
 		});
+
+		initCarousel();
 	});
 	tl.play();
 }

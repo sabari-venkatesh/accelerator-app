@@ -18,23 +18,25 @@ body {
 	left: 50%;
 	transform: translateX(-50%);
 	@include space(1.5, padding-bottom);
-	font-size: 1.2em;
+	font-size: 1rem;
 	&:before,
 	&:after {
 		content: '';
 		position: absolute;
 		bottom: 0;
 		left: 50%;
-		width: 12px;
-		height: 12px;
-		margin-left: -6px;
-		border-left: 2px solid #fff;
-		border-bottom: 2px solid #fff;
-		transform: rotate(-45deg);
+		width: 0.875em;
+		height: 0.875em;
+		border-left: 0.1428em solid #fff;
+		border-bottom: 0.1428em solid #fff;
+		-ms-transform: rotate(-45deg);
+		transform: translateX(-100%) rotate(-45deg);
+		animation: bounce 1.5s infinite;
+		transform-origin: 0 100%;
 		animation: bounce 1.5s infinite;
 	}
 	&:after {
-		bottom: 8px;
+		bottom: 0.57em;
 		animation-delay: .05s;
 	}
 }
@@ -73,7 +75,10 @@ body {
 .content_inner {
 	position: relative;
 	min-height: 100vh;
-	@include space(1, padding);
+	@include space(1, padding-top);
+	@include space(1, padding-bottom);
+	@include space(2, padding-left);
+	@include space(2, padding-right);
 	header & {
 		display: flex;
 	}
@@ -99,6 +104,18 @@ body {
 	~ span {
 		margin-top: 0.15em;
 	}
+}
+
+.content_bgvideo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	z-index: -100;
+	transform: translate(-50%, -50%);
 }
 
 .content_block {
@@ -192,16 +209,22 @@ figure {
 	font-weight: 300;
 	left: 0;
 	float: left;
-	font-size: 6em;
+	font-size: 5em;
 	top: 50%;
-	transform: translate(-50%, -50%) rotate(-90deg);
+	transform: translate(-40%, -50%) rotate(-90deg);
+	transform-origin: 50% 50%;
 	opacity: 0.4;
 }
 
 .slider {
+	margin: auto;
 	max-width: 80%;
-	margin: 0 auto;
 	text-align: center;
+}
+
+.slide_text {
+	max-width: 70%;
+	margin: 0 auto;
 }
 
 .slide_img {
@@ -214,6 +237,24 @@ figure {
 .slide_img > img {
 	display: block;
 	margin: 0 auto;
+}
+
+.slider_page {
+	cursor: pointer;
+	border: 0;
+	box-shadow: 0 0 0 2px $white;
+	width: 0.875rem;
+	height: 0.875rem;
+	margin: 1em 0.5em 0;
+	padding: 0;
+	border-radius: 50%;
+	display: inline-block;
+	transition: all 0.2s ease-out;
+	outline: 0;
+
+	&.active {
+		box-shadow: inset 10px 10px 0 0 $white;
+	}
 }
 
 .res {
@@ -271,7 +312,6 @@ footer {
 	}
 }
 
-
 .fadeIn {
 	animation: fadeIn 0.2s ease forwards;
 }
@@ -280,7 +320,6 @@ footer {
 	0% {
 		opacity: 0;
 	}
-
 	100% {
 		opacity: 1;
 	}

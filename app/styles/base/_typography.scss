@@ -8,7 +8,10 @@ html {
 	}
 	font-size: $base-font-size;
 	-webkit-font-smoothing: antialiased;
-	line-height: $base-line-height;
+	line-height: $rhythm;
+	@media only screen and (min-width: 1824px) {
+		font-size: 24px;
+	}
 }
 
 body {

@@ -1,3 +1,6 @@
+$nav_color: $white;
+$navoverlay_color: rgba(34, 34, 34, 0.99);
+
 .nav_overlay {
 	position: fixed;
 	width: 100%;
@@ -5,10 +8,10 @@
 	top: 0;
 	left: 0;
 	z-index: map-get($layers, navoverlay);
-	background: rgba(34, 34, 34, 0.6);
+	background: $navoverlay_color url("../images/video-overlay.png") repeat 0 0;
 	color: $white;
 	visibility: hidden;
-	transform: translateY(100%);
+	transform: translateY(-100%);
 	transition: transform 0.5s cubic-bezier(.7, 0, .3, 1), visibility 0s 0.5s;
 	.when-overlay & {
 		visibility: visible;
@@ -59,21 +62,21 @@
 }
 
 .nav_toggle {
-	$btn-ratio: ($base-line-height - $base-line-height/4) / 2;
+	$btn-ratio: (1.5 - 1.5/4) / 2 + rem;
 	display: block;
 	position: fixed;
 	z-index: map-get($layers, navtoggle);
 	@include space(1.5, top);
 	@include space(1.5, right);
-	height: $base-line-height;
-	width: 2.5em;
+	height: 1.5rem;
+	width: 2.5rem;
 	span {
-		background: #172d52;
+		background: $nav_color;
 		display: inherit;
 		position: absolute;
 		left: 0;
 		top: $btn-ratio;
-		height: $base-line-height/4;
+		height: 1.5/4 + rem;
 		width: 100%;
 		transition: all 0.5s 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 	}
@@ -83,8 +86,8 @@
 		position: absolute;
 		right: 0;
 		width: 80%;
-		height: $base-line-height/4;
-		background: #172d52;
+		height: 1.5/4 + rem;
+		background: $nav_color;
 		transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 	}
 	&:before {
