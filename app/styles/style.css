@@ -158,11 +158,11 @@ h1,.h1 {
 
 h2,.h2 {
     font-size: 37px;
-    font-size: 2.64286rem;
+    font-size: 2rem;
     line-height: 42px;
-    line-height: 3rem;
+    line-height: 2.5rem;
     margin-bottom: 21px;
-    margin-bottom: 1.5rem
+    margin-bottom: 1.5rem;
 }
 
 h3,.h3 {
@@ -581,7 +581,8 @@ a.button:hover:before,a.button:hover:after {
     padding-left: 21px;
     padding-left: 1.5rem;
     color: inherit;
-    display: block
+    display: block;
+    /* text-shadow: 0 1px 2px rgba(0,0,0,0.8); */
 }
 
 .link-card:before,.link-card:after {
